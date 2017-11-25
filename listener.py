@@ -1,6 +1,7 @@
 #!/usr/bin/python2.7
 
 import json
+import re
 import tweepy # pip install tweepy
 
 config = None
@@ -11,9 +12,21 @@ class ListenerImpl(tweepy.StreamListener):
 		self.api = api
 
 	def on_status(self, status):
+		if status.user.screen_name == 'ShePlusPlusTeam':
+			print 'Stop tweeting yourself plz'
+			return
+
 		print 'Responding to ' + status.user.screen_name
 		text = 'I don\'t know what you want @' + status.user.screen_name + ' :('
-		self.api.update_status(text)
+
+		tokens = re.findall(r'\w+', status.text.lower())
+		
+		if 'team' in tokens and 'name' in tokens:
+			text = 'I can\'t generate team names just yet @' + status.user.screen_name
+		try:
+			self.api.update_status(text, status.id)
+		except Exception, e:
+			print 'Twitter error :(', e 
 
 class Listener(object):
 
