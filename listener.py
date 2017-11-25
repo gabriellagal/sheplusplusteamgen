@@ -3,6 +3,7 @@
 import json
 import re
 import tweepy # pip install tweepy
+from randomize import shuffle_all
 
 config = None
 
@@ -12,6 +13,8 @@ class ListenerImpl(tweepy.StreamListener):
 		self.api = api
 
 	def on_status(self, status):
+		global shuffle_all
+
 		if status.user.screen_name == 'ShePlusPlusTeam':
 			print 'Stop tweeting yourself plz'
 			return
@@ -22,7 +25,7 @@ class ListenerImpl(tweepy.StreamListener):
 		tokens = re.findall(r'\w+', status.text.lower())
 		
 		if 'team' in tokens and 'name' in tokens:
-			text = 'I can\'t generate team names just yet @' + status.user.screen_name
+			text = 'You should call your team ' + shuffle_all() +' @' + status.user.screen_name
 		try:
 			self.api.update_status(text, status.id)
 		except Exception, e:
