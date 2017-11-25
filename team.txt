@@ -9,11 +9,13 @@ contingent
 crew
 crowd
 faction
+federation
 gang
 group
 guild
 league
 lot
+network
 pack
 posse
 society
