@@ -5,7 +5,7 @@ import tweepy # pip install tweepy
 
 config = None
 
-class FollowListener(tweepy.StreamListener):
+class ListenerImpl(tweepy.StreamListener):
 	
 	def __init__(self, api):
 		self.api = api
@@ -15,20 +15,27 @@ class FollowListener(tweepy.StreamListener):
 		text = 'I don\'t know what you want @' + status.user.screen_name + ' :('
 		self.api.update_status(text)
 
+class Listener(object):
+
+	def __init__(self, path = '/root/python/sheplusplusteamgen/config.json'):
+		with open(path, 'r') as f:
+			data = f.read()
+			self.config = json.loads(data)
+	
+	def listen(self, term = '@ShePlusPlusTeam'):
+		auth = tweepy.OAuthHandler(self.config['consumer_key'], self.config['consumer_secret'])
+		auth.set_access_token(self.config['access_token'], self.config['access_token_secret'])
+		api = tweepy.API(auth)
+		listener = ListenerImpl(api)
+		stream = tweepy.Stream(auth = api.auth, listener=listener)
+
+		print 'Listening'
+		stream.filter(track=['@ShePlusPlusTeam'])
+		
+
 def main():
-	global config
-	
-	with open('/root/python/sheplusplusteamgen/config.json', 'r') as f:
-		data = f.read()
-		config = json.loads(data)
-	
-	auth = tweepy.OAuthHandler(config['consumer_key'], config['consumer_secret'])
-	auth.set_access_token(config['access_token'], config['access_token_secret'])
-	api = tweepy.API(auth)
-	listener = FollowListener(api)
-	stream = tweepy.Stream(auth = api.auth, listener=listener)
+	listener = Listener()
+	listener.listen()
 
-	print 'Listening'
-	stream.filter(track=['@ShePlusPlusTeam'])
-
-main()
+if __name__ == '__main__':
+	main()
