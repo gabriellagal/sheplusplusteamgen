@@ -19,7 +19,7 @@ def shuffleteam():
     with open("team.txt".rstrip(), mode="r") as teammix:
     	words = []
     	for word in teammix:
-    		words.append(word.rstrip('\n')
+    		words.append(word.rstrip('\n'))
     	return random.choice(words) 
 
 def shuffle_all():
