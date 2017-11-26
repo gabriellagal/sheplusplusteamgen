@@ -1,0 +1,10 @@
+[Unit]
+Description=She++ Listener
+
+[Service]
+Type=idle
+ExecStart=/root/python/sheplusplusteamgen/listener.py
+WorkingDirectory=/root/python/sheplusplusteamgen
+
+[Install]
+WantedBy=multi-user.target

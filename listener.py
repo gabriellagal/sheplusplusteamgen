@@ -3,18 +3,17 @@
 import json
 import re
 import tweepy # pip install tweepy
-from randomize import shuffle_all
-
+from common import Shuffler, load_config
+ 
 config = None
 
 class ListenerImpl(tweepy.StreamListener):
 	
 	def __init__(self, api):
 		self.api = api
+		self.shuffler = Shuffler()
 
 	def on_status(self, status):
-		global shuffle_all
-
 		if status.user.screen_name == 'ShePlusPlusTeam':
 			print 'Stop tweeting yourself plz'
 			return
@@ -23,20 +22,25 @@ class ListenerImpl(tweepy.StreamListener):
 		text = 'I don\'t know what you want @' + status.user.screen_name + ' :('
 
 		tokens = re.findall(r'\w+', status.text.lower())
-		
+	
+		shuffler = Shuffler()
+	
 		if 'team' in tokens and 'name' in tokens:
-			text = 'You should call your team ' + shuffle_all() +' @' + status.user.screen_name
+			text = 'You should call your team ' + self.shuffler.shuffle() +' @' + status.user.screen_name
 		try:
 			self.api.update_status(text, status.id)
 		except Exception, e:
-			print 'Twitter error :(', e 
+			print 'Twitter error :(', e
+
+	def on_error(self, status_code):
+		print 'Tweepy failure :(', status_code
+		if status_code == 420:
+			return
 
 class Listener(object):
 
-	def __init__(self, path = '/root/python/sheplusplusteamgen/config.json'):
-		with open(path, 'r') as f:
-			data = f.read()
-			self.config = json.loads(data)
+	def __init__(self):
+		self.config = load_config()
 	
 	def listen(self, term = '@ShePlusPlusTeam'):
 		auth = tweepy.OAuthHandler(self.config['consumer_key'], self.config['consumer_secret'])
@@ -47,7 +51,7 @@ class Listener(object):
 
 		print 'Listening'
 		stream.filter(track=['@ShePlusPlusTeam'])
-		
+		print 'Closing'
 
 def main():
 	listener = Listener()

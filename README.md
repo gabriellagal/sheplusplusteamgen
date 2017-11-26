@@ -6,6 +6,9 @@ Our team project for the mentored hack.
 
 Here’s a link to our [twitter bot](https://twitter.com/ShePlusPlusTeam)
 
+### Get Started
+Copy config\_example.json to config.json, and fill out the Twitter access credentials.
+
 ### Why?
 
 We had trouble picking a team name, so we decided to build a twitter too to do it for us. Simple!
