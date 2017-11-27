@@ -50,7 +50,7 @@ We also wanted it to be able to tweet out semi-regularly on its own:
 
 ## Authors
 
-* **Alex Millward (mentor)** - *mentor*
+* **Alex Millward** - *mentor*
 * **Gabriella Gal**
 * **Em Donnelly**
 
