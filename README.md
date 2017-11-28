@@ -40,8 +40,8 @@ We also wanted it to be able to tweet out semi-regularly on its own:
 ### How?
 First, we saved the adjectives, computer nouns and team nouns as separate files, and wrote a method that would shuffle each of these lists individually and return a random word. We also wrote a method called 'normalise' that would guarantee that the first letter of each returned word would be upper case.
 
-Then, we added a ##timer to our script that would tweet the sequence, so a suggestion would be posted every 10 minutes. 
-We also built a ##listener program for the @ reply function. 
+Then, we added a ###timer to our script that would tweet the sequence, so a suggestion would be posted every 10 minutes. 
+We also built a ###listener program for the @ reply function. 
 
 ## Built With
 
