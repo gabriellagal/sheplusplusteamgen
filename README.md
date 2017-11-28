@@ -6,16 +6,13 @@ Our team project for the mentored hack.
 
 Here’s a link to our [twitter bot](https://twitter.com/ShePlusPlusTeam)
 
-### Get Started
-Copy config\_example.json to config.json, and fill out the Twitter access credentials.
-
 ### Why?
 
-We had trouble picking a team name, so we decided to build a twitter too to do it for us. Simple!
+We had trouble picking a team name, so we decided to build a twitter to to do it for us. Simple!
 
 ### What?
 
-We picked the structure we wanted for our team names - settling on a three part format consisting of :  
+We picked the structure we wanted for our team names - settling on a three part format:  
 a positive adjective + a noun related to programming or computers + a collective noun for the teams or groups. 
 
 ```
@@ -41,7 +38,10 @@ We also wanted it to be able to tweet out semi-regularly on its own:
 … 
 
 ### How?
+First, we saved the adjectives, computer nouns and team nouns as separate files, and wrote a method that would shuffle each of these lists individually and return a random word. We also wrote a method called 'normalise' that would guarantee that the first letter of each returned word would be upper case.
 
+Then, we added a ##timer to our script that would tweet the sequence, so a suggestion would be posted every 10 minutes. 
+We also built a ##listener program for the @ reply function. 
 
 ## Built With
 
