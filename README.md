@@ -8,7 +8,7 @@ Here’s a link to our [twitter bot](https://twitter.com/ShePlusPlusTeam)
 
 ### Why?
 
-We had trouble picking a team name, so we decided to build a twitter to to do it for us. Simple!
+We had trouble picking a team name, so we decided to build a Twitter bot to to do it for us. Simple!
 
 ### What?
 
@@ -24,7 +24,7 @@ Dazzling Hexadecimal Heroes
 ```
 
 
-Next, came planning the text for our tweets that we would be able to drop the random words into. We wanted our bot to be able to write two kinds of tweets. Firstly, in response to people who tweet it asking for a team name:
+Next came planning the text for our tweets that we would be able to drop the random words into. We wanted our bot to be able to write two kinds of tweets. Firstly, in response to people who tweet it asking for a team name:
 
 ```
 “You should call your team Determined Cache Bunch @example”
